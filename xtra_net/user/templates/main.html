@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<body style="margin:0">
+<form>
+    {% csrf_token %}
+    <div style="margin-top:2%;margin-left:2%">
+        <div style="display:flex ;">
+            <div>
+                <select class="form-select" aria-label="Default select example" name="Support Engineer">
+                    <option selected>Support Engineer</option>
+                    {%for dat1 in Support_Engineer_ %}
+                    <option value="{{dat1.Support_Engineer}}">{{dat1.Support_Engineer}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <input name="User name" style="margin-left:1%" type="text" placeholder="User name" required>
+            <input name="Phone Number" style="margin-left:1%" type="tel" placeholder="Phone Number" required>
+            <input name="LCO" style="margin-left:1%" type="text" placeholder="LCO" required>
+
+        </div>
+        <div style="display:flex;margin-top:1%">
+            <div>
+                <select class="form-select" aria-label="Default select example" name="Issue_">
+                    <option selected>Issue</option>
+                    {%for dat2 in Issue_ %}
+                    <option value="{{dat2.Issue}}">{{dat2.Issue}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <input name="Remark" style="margin-left:1%" type="text" placeholder="Remark" required>
+            <div style="margin-left:1%">
+                <select class="form-select" aria-label="Default select example" name="Statuss">
+                    <option selected>Status</option>
+                    {%for dat3 in Status_ %}
+                    <option value="{{dat3.Status}}">{{dat3.Status}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <div style="margin-left:1%">
+                <select class="form-select" aria-label="Default select example" name="ESCALATION">
+                    <option selected>ESCALATION</option>
+                    {%for dat4 in ESCALATION_ %}
+                    <option value="{{dat4.ESCALATION}}">{{dat4.ESCALATION}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <input name="ESCALATION REMARK" style="margin-left:1%" type="text" placeholder="ESCALATION REMARK">
+            <input formaction="/submit_data" formenctype="multipart/form-data" formmethod="post" style="margin-left:1%"
+                   class="btn btn-primary" type="submit" value="Submit">
+
+        </div>
+    </div>
+</form>
+<div style="margin-left:2%">
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Support Engineer</th>
+            <th>UserName</th>
+            <th>Phone Number</th>
+            <th>LCO</th>
+            <th>Issue</th>
+            <th>Remark</th>
+            <th>Status</th>
+            <th>ESCALATION</th>
+            <th>ESCALATION REMARK</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dat in data_ %}
+        <tr>
+            <td>{{dat.Support_Engineer}}</td>
+            <td>{{dat.User_name}}</td>
+            <td>{{dat.phone_no}}</td>
+            <td>{{dat.LCO}}</td>
+            <td>{{dat.Issue}}</td>
+            <td>{{dat.Remark}}</td>
+            <td>{{dat.Status}}</td>
+            <td>{{dat.ESCALATION}}</td>
+            <td>{{dat.ESCALATION_REMARK}}</td>
+            <td><img src="static/edit.png" width="30"></td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
